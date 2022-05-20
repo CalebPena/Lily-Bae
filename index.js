@@ -1,33 +1,35 @@
 const express = require('express');
 const serverless = require('serverless-http');
 
-const app = express();
+const router = express();
 
-app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/static'));
+router.set('view engine', 'ejs');
+router.use(express.static(__dirname + '/static'));
 
-app.get('/home', (req, res) => {
+router.get('/home', (req, res) => {
     res.render('home', { title: 'Home' });
 })
 
-app.get('/services', (req, res) => {
+router.get('/services', (req, res) => {
     res.render('services', { title: 'Services' });
 })
 
-app.get('/about', (req, res) => {
+router.get('/about', (req, res) => {
     res.render('about', { title: 'About' });
 })
 
-app.use((req, res) => {
+router.use((req, res) => {
     res.redirect('/home');
 })
 
 
-app.listen(3000, () => {
-    console.log('listening on port 3000');
-})
+// router.listen(3000, () => {
+//     console.log('listening on port 3000');
+// })
 
-const handler = serverless(app, { provider: 'azure' });
-module.exports.funcName = async (context, req) => {
-    context.res = await handler(context, req);
-}
+router.use('/.netlify/functions/server', router);
+router.use('/', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')));
+
+
+module.exports = router;
+module.exports.handler = serverless(router);
