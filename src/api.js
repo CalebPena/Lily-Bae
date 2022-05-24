@@ -5,26 +5,29 @@ const app = express();
 const router = express.Router()
 
 app.set('view engine', 'ejs');
-router.use(express.static(__dirname + '/static'));
+app.use(express.static(__dirname + '/static'));
 
-router.get('/home', (req, res) => {
+app.get('/home', (req, res) => {
     res.render('home', { title: 'Home' });
 })
 
-router.get('/services', (req, res) => {
+app.get('/services', (req, res) => {
     res.render('services', { title: 'Services' });
 })
 
-router.get('/about', (req, res) => {
+app.get('/about', (req, res) => {
     res.render('about', { title: 'About' });
 })
 
-router.use((req, res) => {
+app.use((req, res) => {
     res.redirect('/home');
 })
 
-app.use('/.netlify/functions/api', router);
+// app.use('/.netlify/functions/api', router);
 
+app.listen(3000, () => {
+    console.log('Listening on port 3000');
+})
 
 module.exports = app;
 module.exports.handler = serverless(app);

@@ -60,6 +60,12 @@ h1 {
     overflow: hidden;
     background-color: #A8DADC;
     margin: 0px 10%;
+    text-align: center;
+}
+
+.gel {
+    width: 90%;
+    margin: 1%;
 }
 
 .productImage {
@@ -80,10 +86,6 @@ h1 {
 }
 
 .description {
-    text-align: center;
-}
-
-.product {
     text-align: center;
 }
 
@@ -140,8 +142,18 @@ a {
     color: #33cccc;
 }
 
+.quote {
+    width: 75%;
+    border: 3px solid #1D3557;
+    margin-left: 5%;
+    margin-top: 50px;
+    padding: 10PX;
+    border-radius: 10px;
+    background-color: #A8DADC;
+}
+
 footer {
-    height: 50px;
+    height: auto;
     position: absolute;
     width: 100%;
     background-color: #1D3557;
@@ -155,6 +167,16 @@ footer {
 
 .footelement {
     margin: 0px;
+}
+
+.footLink:hover {
+    text-decoration: underline;
+}
+
+.galleryTitle {
+    font-size: 90px;
+    text-align: center;
+    border-bottom: 1px solid #1D3557;
 }
 
 .gallery {
@@ -172,6 +194,10 @@ footer {
 @media (max-width: 480px) {
     .product {
         width: 280px;
+    }
+
+    footer {
+        flex-direction: column;
     }
 }
 
