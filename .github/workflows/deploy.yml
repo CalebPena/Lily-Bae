@@ -1,0 +1,21 @@
+name: Deploy App
+
+on:
+  push:
+    branches: [ joel ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to prod
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{secrets.SSH_HOST}}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd ~/lilybae.s-12.com
+            git pull
+            npm install
+            touch tmp/restart.txt
