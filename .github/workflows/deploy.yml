@@ -11,9 +11,9 @@ jobs:
       - name: Deploy to prod
         uses: appleboy/ssh-action@v0.1.4
         with:
-          host: ${{secrets.SSH_HOST}}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
+          host: ${{ env.SSH_HOST }}
+          username: ${{ env.SSH_USERNAME }}
+          password: ${{ env.SSH_PASSWORD }}
           script: |
             cd ~/lilybae.s-12.com
             git pull
