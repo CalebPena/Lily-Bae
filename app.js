@@ -3,16 +3,16 @@ const express = require('express');
 const app = express();
 
 // Redirect www to non-www.
-function redirectWwwTraffic(req, res, next) {
-    if (req.headers.host.slice(0, 4) === 'www.') {
-        var newHost = req.headers.host.slice(4)
-        return res.redirect(301, req.protocol + '://' + newHost + req.originalUrl)
-    }
-    next();
-}
+function checkUrl(req, res, next) {
+    let host = req.headers.host
 
-app.set('trust proxy', true)
-app.use(redirectWwwTraffic)
+    if (host.match(/^www\..*/i)) {
+      return res.redirect(301, req.protocol + '://' + host + req.url)
+    }
+    next()
+  }
+
+app.use(checkUrl);
 
 app.use(express.static('./src/static'))
 app.set('views', './src/views')
