@@ -5,9 +5,11 @@ const app = express();
 // Redirect www to non-www.
 function checkUrl(req, res, next) {
     let host = req.headers.host
+    let newHost = req.headers.host.slice(4);
 
     if (host.match(/^www\..*/i)) {
-      return res.redirect(301, req.protocol + '://' + host + req.url)
+
+      return res.redirect(301, req.protocol + '://' + newHost + req.url)
     }
     next()
   }
